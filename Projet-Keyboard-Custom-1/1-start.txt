@@ -1,1 +1,5 @@
+lsusb (command)
+------
+SiGma Micro Keyboard
+------
 
