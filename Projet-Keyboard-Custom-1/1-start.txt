@@ -51,11 +51,15 @@ Voici le contenu que j'ai mis dans ce fichier :
 ---- 1c4f:0026 --- en dessous en Mjuscuke
 evdev:input:b0003v1C4Fp0026*
 
---
+-- command memeo ---
+lsusb
+sudo evtest
 
-
+-----------------------------------------------
 sudo systemd-hwdb update
 sudo udevadm trigger
 ---
 sudo systemd-hwdb update && sleep 2 && sudo udevadm trigger
 ---
+nano /etc/udev/hwdb.d/95-custom-keypad.hwdb
+-----------
