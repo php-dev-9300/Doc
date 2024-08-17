@@ -54,3 +54,8 @@ evdev:input:b0003v1C4Fp0026*
 --
 
 
+sudo systemd-hwdb update
+sudo udevadm trigger
+---
+sudo systemd-hwdb update && sleep 2 && sudo udevadm trigger
+---
