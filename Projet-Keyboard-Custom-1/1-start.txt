@@ -1,5 +1,33 @@
+1. Find how the computer identify your keypad.
+
 lsusb (command)
 ------
 SiGma Micro Keyboard
-------
+----------------------------------------------
+2. List all the scancodes of your keys
+
+We need to install a tool :
+
+sudo apt install evtest
+---
+Test
+sudo evtest
+
+Evtest va lister toutes vos clés USB et vous demander de sélectionner une cible. Ici vous pouvez voir les miennes sur event21, 22 et 23. 
+
+/dev/input/event21:	SIGMACHIP USB Keyboard
+/dev/input/event22:	SIGMACHIP USB Keyboard Consumer Control
+/dev/input/event23:	SIGMACHIP USB Keyboard System Control
+
+Après avoir sélectionné un périphérique (par exemple 21), Evtest commencera à « écouter » la frappe et fournira un retour détaillé sur chaque frappe. Voici un paragraphe pour une seule pression de touche.
+
+Testing ... (interrupt to exit)
+Event: time 1723879023.124762, type 17 (EV_LED), code 0 (LED_NUML), value 0
+Event: time 1723879023.124762, -------------- SYN_REPORT ------------
+Event: time 1723879032.532713, type 4 (EV_MSC), code 4 (MSC_SCAN), value 70014
+Event: time 1723879032.532713, type 1 (EV_KEY), code 16 (KEY_Q), value 1
+Event: time 1723879032.532713, -------------- SYN_REPORT ------------
+aEvent: time 1723879032.652713, type 4 (EV_MSC), code 4 (MSC_SCAN), value 70014
+Event: time 1723879032.652713, type 1 (EV_KEY), code 16 (KEY_Q), value 0
+Event: time 1723879032.652713, -------------- SYN_REPORT ------------
 
