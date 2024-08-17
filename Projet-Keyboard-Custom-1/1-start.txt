@@ -22,12 +22,35 @@ Evtest va lister toutes vos clés USB et vous demander de sélectionner une cibl
 Après avoir sélectionné un périphérique (par exemple 21), Evtest commencera à « écouter » la frappe et fournira un retour détaillé sur chaque frappe. Voici un paragraphe pour une seule pression de touche.
 
 Testing ... (interrupt to exit)
-Event: time 1723879023.124762, type 17 (EV_LED), code 0 (LED_NUML), value 0
-Event: time 1723879023.124762, -------------- SYN_REPORT ------------
-Event: time 1723879032.532713, type 4 (EV_MSC), code 4 (MSC_SCAN), value 70014
-Event: time 1723879032.532713, type 1 (EV_KEY), code 16 (KEY_Q), value 1
-Event: time 1723879032.532713, -------------- SYN_REPORT ------------
-aEvent: time 1723879032.652713, type 4 (EV_MSC), code 4 (MSC_SCAN), value 70014
-Event: time 1723879032.652713, type 1 (EV_KEY), code 16 (KEY_Q), value 0
-Event: time 1723879032.652713, -------------- SYN_REPORT ------------
+Event: time 1723879345.906623, type 4 (EV_MSC), code 4 (MSC_SCAN), value 70029
+Event: time 1723879345.906623, type 1 (EV_KEY), code 1 (KEY_ESC), value 1
+Event: time 1723879345.906623, -------------- SYN_REPORT ------------
+^[Event: time 1723879346.010628, type 4 (EV_MSC), code 4 (MSC_SCAN), value 70029
+Event: time 1723879346.010628, type 1 (EV_KEY), code 1 (KEY_ESC), value 0
+Event: time 1723879346.010628, -------------- SYN_REPORT ------------
+
+Dans ce paragraphe, nous ne cherchons que la MSC_SCAN valeur. Pour notre clé, c'est 70029. Notez toutes les valeurs MSC_SCAN pour vos touches de clavier. Si certaines touches ne renvoient rien, vérifiez également si votre appareil avait d'autres entrées evtest (la mienne en a 3). Vous les trouverez de cette façon (par exemple, c'était le cas pour ma touche clavier, seule sur event21). 
+
+3. Attribuez des codes clés personnalisés à votre appareil
+
+Commencez par faire un plan ou un croquis de votre future disposition de clavier ; ce n'est pas facile, et c'est une bonne idée de le faire avec un crayon et une gomme, car vous pouvez changer d'avis au cours du processus de conception.
+
+Pour appliquer notre plan, nous allons créer un nouveau fichier dans /etc/udev/hwdb.d/95-custom-keypad.hwdb(utilisez votre éditeur avec des privilèges d'administrateur, dans mon cas : sudo micro /etc/udev/hwdb.d/95-custom-keypad.hwdb).
+
+Le nom du fichier est flexible :
+
+95-= vous pouvez utiliser n'importe quel nombre à deux chiffres pour commencer votre nom de fichier. Il est utilisé pour trier les fichiers de configuration.
+
+custom-keypad= votre description personnalisée de votre appareil, en minuscules, sans espaces (vous pouvez la remplacer par le séparateur -).
+
+.hwdb= l'extension, obligatoire.
+-----------------
+nano /etc/udev/hwdb.d/95-custom-keypad.hwdb
+
+Voici le contenu que j'ai mis dans ce fichier :
+---- 1c4f:0026 --- en dessous en Mjuscuke
+evdev:input:b0003v1C4Fp0026*
+
+--
+
 
