@@ -1,0 +1,8 @@
+apt update
+----------------
+sudo apt-get install sharutils
+----------------
+cat -n /etc/apt/sources.list.d/eid.list
+----------------
+pcsc_scan
+----------------
